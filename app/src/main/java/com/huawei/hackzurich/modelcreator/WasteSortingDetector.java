@@ -20,10 +20,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-public class DetailWastesortingDetector {
+public class WasteSortingDetector {
     private static final String LOG_TAG = "hiai";
     //the model trained in hms toolkit
-    private static final String MODEL_NAME = "image/detailWasteSorting.mc";
+    private static final String MODEL_NAME = "image/wasteSorting.mc";
     private volatile ImageClassifier classifier;
     private Context context;
 
