@@ -19,8 +19,12 @@
  */
 package com.huawei.hackzurich
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.LocationManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -29,6 +33,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.huawei.hms.maps.CameraUpdateFactory
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.OnMapReadyCallback
@@ -48,7 +53,11 @@ import kotlin.collections.ArrayList
 class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
     companion object {
         private const val TAG = "RoutePlanningDemoActivity"
+        const val REQUEST_CODE = 0X01
+        private val PERMISION = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
+        private const val ZOOM_DELTA = 2.0f
     }
+
 
     private var mSupportMapFragment: SupportMapFragment? = null
     private var hMap: HuaweiMap? = null
@@ -82,6 +91,9 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_route_planning_demo)
+        if (!hasLocationPermission()) {
+            ActivityCompat.requestPermissions(this, PERMISION, REQUEST_CODE)
+        }
         val fragment = supportFragmentManager.findFragmentById(R.id.mapfragment_routeplanningdemo)
         if (fragment is SupportMapFragment) {
             mSupportMapFragment = fragment
@@ -94,8 +106,31 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    private fun isGPSOpen(context: Context): Boolean {
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        val network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        return gps || network
+    }
+
+    private fun hasLocationPermission(): Boolean {
+        for (permission in PERMISION) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false
+            }
+        }
+        return true
+    }
+
     override fun onMapReady(huaweiMap: HuaweiMap) {
         hMap = huaweiMap
+        if (isGPSOpen(this)) {
+            hMap?.isMyLocationEnabled = true
+            hMap?.uiSettings?.isMyLocationButtonEnabled = true
+        } else {
+            hMap?.isMyLocationEnabled = false
+            hMap?.uiSettings?.isMyLocationButtonEnabled = false
+        }
         hMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngs[0], 13f))
         getWalkingRouteResult(latLngs[0], latLngs[1])
         getWalkingRouteResult(latLngs[1], latLngs[2])
@@ -159,6 +194,8 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
 //                    }
 //                })
 //    }
+
+
 
     private fun generateRoute(json: String?) {
         try {
