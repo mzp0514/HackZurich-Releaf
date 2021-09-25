@@ -19,15 +19,17 @@
 <!--            />-->
 
 
+        <ImageView
+            android:id="@+id/fake_market_ui"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/top_bar"
+            android:layout_marginTop="-50dp"
+            android:src="@mipmap/fake_market_ui" />
+
         <include
             android:id="@+id/top_bar"
             layout="@layout/top_bar_view" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:src="@tools:sample/backgrounds/scenic" />
 
         <include
             layout="@layout/navigation_bar_view"/>

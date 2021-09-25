@@ -92,7 +92,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         } else if (p0 === messageView) {
-            val intent = Intent(this, RoutePlanningDemoActivity::class.java)
+            val intent = Intent(this, MessageActivity::class.java)
             startActivity(intent)
         }
     }

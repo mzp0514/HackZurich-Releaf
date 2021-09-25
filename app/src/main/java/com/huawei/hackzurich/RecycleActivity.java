@@ -27,11 +27,9 @@ public class RecycleActivity extends FragmentActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view.equals(fakeView)) {
-            // TODO: goto map
-        } else if (view.equals(recycleView)) {
-            Intent intent = new Intent(this, RecycleActivity.class);
+            Intent intent = new Intent(this, RoutePlanningDemoActivity.class);
             startActivity(intent);
-        } else if (view.equals(profileView)) {
+       } else if (view.equals(profileView)) {
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         } else if (view.equals(cartView)) {
