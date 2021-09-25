@@ -1,20 +1,39 @@
 package com.huawei.hackzurich
 
+import android.Manifest
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.Context
+import android.app.AlertDialog
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import androidx.core.app.ActivityCompat
 
 import android.content.pm.PackageManager
+import android.os.Build
+import android.graphics.Bitmap
+import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import com.huawei.hackzurich.modelcreator.WasteSortingDetector
+import com.huawei.hackzurich.utils.MapUtils
+import com.huawei.hms.maps.MapsInitializer
 
 
 class MainActivity : FragmentActivity(), View.OnClickListener {
+    companion object {
+        private const val TAG = "MainActivity"
+        private val RUNTIME_PERMISSIONS = arrayOf(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET)
+        private const val REQUEST_CODE = 100
+    }
 
     private val REQUEST_CAMERA = 0x01
     private var recycleBlockView : View ?= null
@@ -22,11 +41,15 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
     private var marketBlockView : View ?= null
     private var profileView : View ?= null
     private var messageView : View ?= null
-
+    private val REQUEST_IMAGE_CAPTURE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (!hasPermissions(this, *RUNTIME_PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, RUNTIME_PERMISSIONS, REQUEST_CODE)
+        }
+
 //        title = getString(R.string.app_title)
 
 //        val cameraPreview = window.decorView.findViewById<CameraPreview>(R.id.camera_view)
@@ -48,6 +71,8 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
 //        }
         initView()
 
+        MapsInitializer.setApiKey(MapUtils.API_KEY)
+
         if (ContextCompat.checkSelfPermission(this, CAMERA)
             !== PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
@@ -58,6 +83,17 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
             )
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            var wasteSorting = WasteSortingDetector(this)
+            var ans = wasteSorting.detect(imageBitmap)
+            activateAlertDialogBuilder(ans)
+        }
+    }
+
 
     override fun onClick(p0: View?) {
         if (p0 === recycleBlockView) {
@@ -73,13 +109,28 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent);
         } else if (p0 === messageView) {
-            val intent = Intent(this, MessageActivity::class.java)
+            val intent = Intent(this, RoutePlanningDemoActivity::class.java)
             startActivity(intent);
         }
     }
 
     private fun takePhoto() {
 
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        } catch (e: ActivityNotFoundException) {
+            // display error state to the user
+        }
+    }
+
+    private fun activateAlertDialogBuilder(ans: WasteSortingDetector.Prediction) {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Category")
+        alertDialogBuilder.setMessage(ans.label)
+        alertDialogBuilder.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> })
+        alertDialogBuilder.setNegativeButton("Cancel", { dialogInterface: DialogInterface, i: Int -> })
+        alertDialogBuilder.show()
     }
 
     private fun initView() {
@@ -112,5 +163,16 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
 //    private fun testHmsCorePresence() {
 //        check(HmsUtils.isHmsAvailable(this)) { "Please make sure you have HMS Core installed on the test device." }
 //    }
+
+    private fun hasPermissions(context: Context, vararg permissions: String): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && permissions != null) {
+            for (permission in permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
 }
 
