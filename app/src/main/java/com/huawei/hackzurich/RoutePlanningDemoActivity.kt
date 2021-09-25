@@ -137,9 +137,6 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         getWalkingRouteResult(latLngs[0], latLngs[1])
         getWalkingRouteResult(latLngs[1], latLngs[2])
 
-//        val modalBottomSheet = ItemListDialogFragment()
-//        modalBottomSheet.show(supportFragmentManager, "a")
-
         val dialog = BottomSheetDialog(this)
         val bottomSheet = layoutInflater.inflate(R.layout.bottom_sheet, null)
 

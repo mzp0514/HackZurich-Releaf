@@ -87,13 +87,13 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         }
         else if (p0 === marketBlockView) {
             val intent = Intent(this, MarketActivity::class.java)
-            startActivity(intent);
+            startActivity(intent)
         } else if (p0 === profileView) {
             val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent);
+            startActivity(intent)
         } else if (p0 === messageView) {
             val intent = Intent(this, RoutePlanningDemoActivity::class.java)
-            startActivity(intent);
+            startActivity(intent)
         }
     }
 
