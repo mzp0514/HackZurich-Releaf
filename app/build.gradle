@@ -37,6 +37,10 @@ android {
         }
     }
 
+    aaptOptions {
+        noCompress "mc"  // Your model's file extension: "mc".
+    }
+
     packagingOptions {
         pickFirst 'okhttp3/internal/publicsuffix/publicsuffixes.gz'
     }
