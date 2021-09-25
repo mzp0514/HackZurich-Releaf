@@ -11,13 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.huawei.hackzurich.CameraPreview
-            android:id="@+id/camera_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true" />
-
-<!--        <FrameLayout-->
+        <!--        <FrameLayout-->
 <!--            android:id="@+id/camera_view"-->
 <!--            android:layout_width="0px"-->
 <!--            android:layout_height="fill_parent"-->
@@ -28,6 +22,12 @@
         <include
             android:id="@+id/top_bar"
             layout="@layout/top_bar_view" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
         <include
             layout="@layout/navigation_bar_view"/>

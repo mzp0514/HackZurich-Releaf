@@ -19,7 +19,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
     private val REQUEST_CAMERA = 0x01
     private var recycleBlockView : View ?= null
     private var scanBlockView : View ?= null
-    private var cartBlockView : View ?= null
+    private var marketBlockView : View ?= null
     private var profileView : View ?= null
     private var messageView : View ?= null
 
@@ -66,8 +66,8 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         } else if (p0 === scanBlockView) {
             takePhoto()
         }
-        else if (p0 === cartBlockView) {
-            val intent = Intent(this, CartActivity::class.java)
+        else if (p0 === marketBlockView) {
+            val intent = Intent(this, MarketActivity::class.java)
             startActivity(intent);
         } else if (p0 === profileView) {
             val intent = Intent(this, ProfileActivity::class.java)
@@ -85,13 +85,13 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
     private fun initView() {
         recycleBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_1)
         scanBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_2)
-        cartBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_3)
+        marketBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_3)
         profileView = findViewById<ImageView>(R.id.profile_icon)
         messageView = findViewById<ImageView>(R.id.message_icon)
 
         recycleBlockView?.setOnClickListener(this)
         scanBlockView?.setOnClickListener(this)
-        cartBlockView?.setOnClickListener(this)
+        marketBlockView?.setOnClickListener(this)
         profileView?.setOnClickListener(this)
         messageView?.setOnClickListener(this)
 
