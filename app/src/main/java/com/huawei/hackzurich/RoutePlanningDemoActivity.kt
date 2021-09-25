@@ -108,6 +108,7 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         latLngs.add(LatLng(47.402177626411635, 8.47259129868391)) // Vergarverk Biogas Zurich Biowaste
         latLngs.add(LatLng(47.397993427656424, 8.481548334262188)) // Recyclinghof Werdhölzli
 
+
     }
 
     private fun isGPSOpen(context: Context): Boolean {
@@ -138,6 +139,10 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         hMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngs[0], 13f))
         getWalkingRouteResult(latLngs[0], latLngs[1])
         getWalkingRouteResult(latLngs[1], latLngs[2])
+
+        addMarker(latLngs[0])
+        addMarker(latLngs[1])
+        addMarker(latLngs[2])
 
         var dialog = BottomSheetDialog(this)
         var bottomSheet = layoutInflater.inflate(R.layout.bottom_sheet, null)
@@ -174,49 +179,6 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                 })
     }
-
-//    fun getBicyclingRouteResult(view: View?, latLng1: LatLng, latLng2: LatLng) {
-//        removePolylines()
-//        NetworkRequestManager.getBicyclingRoutePlanningResult(latLng1, latLng2,
-//                object : OnNetworkListener {
-//                    override fun requestSuccess(result: String?) {
-//                        generateRoute(result)
-//                    }
-//
-//                    override fun requestFail(errorMsg: String?) {
-//                        val msg = Message.obtain()
-//                        val bundle = Bundle()
-//                        bundle.putString("errorMsg", errorMsg)
-//                        if (errorMsg != null) {
-//                            Log.d(TAG, errorMsg)
-//                        }
-//                        msg.what = 1
-//                        msg.data = bundle
-//                        mHandler.sendMessage(msg)
-//                    }
-//                })
-//    }
-//
-//    fun getDrivingRouteResult(view: View?, latLng1: LatLng, latLng2: LatLng) {
-//        removePolylines()
-//        NetworkRequestManager.getDrivingRoutePlanningResult(latLng1, latLng2,
-//                object : OnNetworkListener {
-//                    override fun requestSuccess(result: String?) {
-//                        generateRoute(result)
-//                    }
-//
-//                    override fun requestFail(errorMsg: String?) {
-//                        val msg = Message.obtain()
-//                        val bundle = Bundle()
-//                        bundle.putString("errorMsg", errorMsg)
-//                        msg.what = 1
-//                        msg.data = bundle
-//                        mHandler.sendMessage(msg)
-//                    }
-//                })
-//    }
-
-
 
     private fun generateRoute(json: String?) {
         try {
@@ -286,8 +248,7 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
                 mPolylines.add(i, polyline)
             }
         }
-        addMarker(paths[0][0])
-        addMarker(paths[0][paths[0].size - 1])
+
         if (null != latLngBounds) {
             val cameraUpdate = CameraUpdateFactory.newLatLngBounds(latLngBounds, 5)
             hMap?.moveCamera(cameraUpdate)
@@ -296,56 +257,12 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-//    fun setOrigin(view: View?) {
-//        val originLatStr = edtOriginLat.text.toString().trim()
-//        val originLngStr = edtOriginLng.text.toString().trim()
-//        if (originLatStr.isNotEmpty() && originLngStr.isNotEmpty()) {
-//            try {
-//                latLng1 = LatLng(originLatStr.toDouble(), originLngStr.toDouble())
-//                removePolylines()
-//                addOriginMarker(latLng1)
-//                hMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 13f))
-//                mMarkerOrigin?.showInfoWindow()
-//            } catch (e: IllegalArgumentException) {
-//                Log.e(TAG, "IllegalArgumentException $e")
-//                Toast.makeText(this, "IllegalArgumentException", Toast.LENGTH_SHORT).show()
-//            } catch (e: NullPointerException) {
-//                Log.e(TAG, "NullPointerException $e")
-//                Toast.makeText(this, "NullPointerException", Toast.LENGTH_SHORT).show()
-//            } catch (e: NumberFormatException) {
-//                Log.e(TAG, "NumberFormatException $e")
-//                Toast.makeText(this, "NumberFormatException", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
-
-//    fun setDestination(view: View?) {
-//        val destinationLatStr = edtDestinationLat.text.toString().trim()
-//        val destinationLngStr = edtDestinationLng.text.toString().trim()
-//        if (destinationLatStr.isNotEmpty() && destinationLngStr.isNotEmpty()) {
-//            try {
-//                latLng2 = LatLng(destinationLatStr.toDouble(), destinationLngStr.toDouble())
-//                removePolylines()
-//                addDestinationMarker(latLng2)
-//                hMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng2, 13f))
-//                mMarkerDestination?.showInfoWindow()
-//            } catch (e: IllegalArgumentException) {
-//                Log.e(TAG, "IllegalArgumentException $e")
-//                Toast.makeText(this, "IllegalArgumentException", Toast.LENGTH_SHORT).show()
-//            } catch (e: NullPointerException) {
-//                Log.e(TAG, "NullPointerException $e")
-//                Toast.makeText(this, "NullPointerException", Toast.LENGTH_SHORT).show()
-//            } catch (e: NumberFormatException) {
-//                Log.e(TAG, "NumberFormatException $e")
-//                Toast.makeText(this, "NumberFormatException", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
 
     private fun addMarker(latLng: LatLng) {
+
       hMap?.addMarker(MarkerOptions().position(latLng)
-                .anchor(0.5f, 0.9f) // .anchorMarker(0.5f, 0.9f)
-                .title("Origin")
+                .anchorMarker(0.5f, 0.9f)
+                .title("")
                 .snippet(latLng.toString()))
     }
 
