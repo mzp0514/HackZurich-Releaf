@@ -34,6 +34,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.huawei.hms.maps.CameraUpdateFactory
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.OnMapReadyCallback
@@ -41,6 +42,7 @@ import com.huawei.hms.maps.SupportMapFragment
 import com.huawei.hms.maps.model.*
 import com.huawei.hackzurich.utils.NetworkRequestManager
 import com.huawei.hackzurich.utils.NetworkRequestManager.OnNetworkListener
+import kotlinx.android.synthetic.main.bottom_sheet.view.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
@@ -134,6 +136,19 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         hMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngs[0], 13f))
         getWalkingRouteResult(latLngs[0], latLngs[1])
         getWalkingRouteResult(latLngs[1], latLngs[2])
+
+//        val modalBottomSheet = ItemListDialogFragment()
+//        modalBottomSheet.show(supportFragmentManager, "a")
+
+        val dialog = BottomSheetDialog(this)
+        val bottomSheet = layoutInflater.inflate(R.layout.bottom_sheet, null)
+
+        bottomSheet.buttonSubmit.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.setContentView(bottomSheet)
+        dialog.show()
     }
 
     fun getWalkingRouteResult(latLng1: LatLng, latLng2: LatLng) {

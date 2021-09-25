@@ -4,10 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_basic_demo.xml" value="0.1203125" />
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_events_demo.xml" value="0.1203125" />
         <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_map_view.xml" value="0.1203125" />
         <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_marker_demo.xml" value="0.1203125" />
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_route_planning_demo.xml" value="0.264" />
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/bottom_sheet.xml" value="0.10364583333333334" />
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/custom_info_contents.xml" value="0.1203125" />
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/fragment_item_list_dialog_list_dialog.xml" value="0.10364583333333334" />
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/fragment_item_list_dialog_list_dialog_item.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.13645833333333332" />
       </map>
     </option>
