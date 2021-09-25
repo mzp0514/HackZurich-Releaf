@@ -35,13 +35,15 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         private const val REQUEST_CODE = 100
     }
 
+    private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_CAMERA = 0x01
     private var recycleBlockView : View ?= null
     private var scanBlockView : View ?= null
     private var cartBlockView : View ?= null
     private var profileView : View ?= null
     private var messageView : View ?= null
-    private val REQUEST_IMAGE_CAPTURE = 1
+    private var cameraPreview : View ?= null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,25 +52,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
             ActivityCompat.requestPermissions(this, RUNTIME_PERMISSIONS, REQUEST_CODE)
         }
 
-//        title = getString(R.string.app_title)
-
-//        val cameraPreview = window.decorView.findViewById<CameraPreview>(R.id.camera_view)
-//        cameraPreview.cameraPreview
-
-//        actionBar!!.hide();
-
-
-//        val checkStatusTextView = findViewById<TextView>(R.id.main_check)
-//
-//        lifecycle.coroutineScope.launchWhenCreated {
-//            try {
-//                checkHMS()
-//                checkStatusTextView.text = getString(R.string.checking_setup_result_ok)
-//            } catch (checkException: Exception) {
-//                checkStatusTextView.text =
-//                    getString(R.string.checking_setup_result_fail, checkException.message)
-//            }
-//        }
         initView()
 
         MapsInitializer.setApiKey(MapUtils.API_KEY)
@@ -101,8 +84,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
             startActivity(intent);
         } else if (p0 === scanBlockView) {
             takePhoto()
-        }
-        else if (p0 === cartBlockView) {
+        } else if (p0 === cartBlockView) {
             val intent = Intent(this, CartActivity::class.java)
             startActivity(intent);
         } else if (p0 === profileView) {
@@ -139,6 +121,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         cartBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_3)
         profileView = findViewById<ImageView>(R.id.profile_icon)
         messageView = findViewById<ImageView>(R.id.message_icon)
+        cameraPreview = findViewById<CameraPreview>(R.id.camera_view)
 
         recycleBlockView?.setOnClickListener(this)
         scanBlockView?.setOnClickListener(this)
@@ -147,22 +130,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         messageView?.setOnClickListener(this)
 
     }
-
-//    private suspend fun checkHMS() {
-//        testHmsCorePresence()
-//        testAccountByRequestingPushNotificationsToken()
-//    }
-//
-//    private suspend fun testAccountByRequestingPushNotificationsToken() {
-//        val pushToken = withContext(Dispatchers.IO) {
-//            HmsUtils.getPushNotificationsToken(this@MainActivity)
-//        }
-//        check(pushToken.isNotEmpty()) { "Push notifications token retrieved, but empty. Clear app data and try again." }
-//    }
-//
-//    private fun testHmsCorePresence() {
-//        check(HmsUtils.isHmsAvailable(this)) { "Please make sure you have HMS Core installed on the test device." }
-//    }
 
     private fun hasPermissions(context: Context, vararg permissions: String): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && permissions != null) {
