@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar_view" />
 
     <fragment
         android:id="@+id/mapfragment_routeplanningdemo"

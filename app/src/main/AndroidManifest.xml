@@ -34,7 +34,7 @@
         </activity>
         <activity
             android:name=".RoutePlanningDemoActivity"
-            android:label="RoutePlanningDemo" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name="com.huawei.hackzurich.RecycleActivity"/>
         <activity android:name="com.huawei.hackzurich.MarketActivity"/>
         <activity android:name="com.huawei.hackzurich.ProfileActivity"/>

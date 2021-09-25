@@ -8,18 +8,55 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select the items to drop:"
-        android:textSize="25dp"
+        android:text="Recyclinghof Werdhölzli"
+        android:textSize="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"/>
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Items to drop"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/textView"
+        android:layout_marginLeft="10dp"/>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@id/textView"/>
+        android:layout_height="100dp"
+        android:layout_below="@id/textView2"
+        android:id="@+id/gridLayout">
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/beer"
+            android:layout_below="@id/textView"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/can"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:id="@+id/image3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/document"
+            android:layout_weight="1"
+            />
+    </GridLayout>
+
 
     <Button
         android:id="@+id/buttonSubmit"
@@ -27,6 +64,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Confirm"
-        android:layout_below="@id/cardView"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/gridLayout"/>
 
 </RelativeLayout>
