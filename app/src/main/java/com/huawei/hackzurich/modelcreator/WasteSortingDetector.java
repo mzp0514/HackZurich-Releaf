@@ -27,7 +27,7 @@ public class WasteSortingDetector {
     private volatile ImageClassifier classifier;
     private Context context;
 
-    public DetailWastesortingDetector(final Context context) throws Exception {
+    public WasteSortingDetector(final Context context) throws Exception {
         this.context = context;
 
         loadModelFromAssets();
@@ -117,27 +117,27 @@ public class WasteSortingDetector {
 //            @Override
 //            public void run() {
 //                while(!downloadMcTask.isComplete()) {
-//                    Wastesorting2Detector.sleep(1000);
+//                    Wastesorting3Detector.sleep(1000);
 //                    Log.d(LOG_TAG, "wait download mc task isComplete");
 //                }
 //                try {
 //                    File mcFile = MLLocalModelManager.getInstance().getSyncRecentModelFile(new MLCustomRemoteModel.Factory(remoteModelName).create());
 //                    Log.d(LOG_TAG, "mc model path:" + mcFile.getAbsolutePath());
-//                    Wastesorting2Detector.this.classifier = new ImageClassifier(context, new FileInputStream(mcFile), 4);
+//                    Wastesorting3Detector.this.classifier = new ImageClassifier(context, new FileInputStream(mcFile), 4);
 //                    Log.d(LOG_TAG, "load model hms success");
 //
 //                    //download resFile and Load resFile
 //                    //NPU_MODE only suport huawei android phone with NPU, CPU_MODE can be run in almost All Android Phone
 //                    final String resRemoteName = "image_classifier_" + ImageTool.getDDkVersion() + "_" + classifier.getModelVersion() + "_base";
 //                    //final String resRemoteName = "image_classifier_" + ImageConst.DDK000 + "_" + classifier.getModelVersion() + "_base"; //CPU Mode res File
-//                    final Task<Void> downloadResTask = Wastesorting2Detector.this.downloadFile(resRemoteName);
+//                    final Task<Void> downloadResTask = Wastesorting3Detector.this.downloadFile(resRemoteName);
 //                    final String runMode = classifier.isSupportNpuPhone() ? ImageClassifier.NPU_MODE : ImageClassifier.CPU_MODE;
 //
 //                    new Thread() {
 //                        @Override
 //                        public void run() {
 //                            while(!downloadResTask.isComplete()) {
-//                                Wastesorting2Detector.sleep(1000);
+//                                Wastesorting3Detector.sleep(1000);
 //                                Log.d(LOG_TAG, "wait download res task isComplete");
 //                            }
 //                            try {
