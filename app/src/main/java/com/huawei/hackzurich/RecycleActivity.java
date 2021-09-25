@@ -35,7 +35,7 @@ public class RecycleActivity extends FragmentActivity implements View.OnClickLis
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         } else if (view.equals(cartView)) {
-            Intent intent = new Intent(this, CartActivity.class);
+            Intent intent = new Intent(this, MarketActivity.class);
             startActivity(intent);
         } else if (view.equals(scanView)) {
             Intent intent = new Intent(this, MainActivity.class);
