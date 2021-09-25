@@ -38,9 +38,6 @@ class MarketActivity : FragmentActivity(), View.OnClickListener {
        if (view == profileView) {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
-        } else if (view == marketBlockView) {
-            val intent = Intent(this, MarketActivity::class.java)
-            startActivity(intent)
         } else if (view == scanBlockView) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
