@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.core.app.ActivityCompat
 
 import android.content.pm.PackageManager
+import android.hardware.Camera
+import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -22,6 +24,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
     private var cartBlockView : View ?= null
     private var profileView : View ?= null
     private var messageView : View ?= null
+    private var cameraPreview : View ?= null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,8 +68,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
             startActivity(intent);
         } else if (p0 === scanBlockView) {
             takePhoto()
-        }
-        else if (p0 === cartBlockView) {
+        } else if (p0 === cartBlockView) {
             val intent = Intent(this, CartActivity::class.java)
             startActivity(intent);
         } else if (p0 === profileView) {
@@ -88,6 +90,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         cartBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_3)
         profileView = findViewById<ImageView>(R.id.profile_icon)
         messageView = findViewById<ImageView>(R.id.message_icon)
+        cameraPreview = findViewById<CameraPreview>(R.id.camera_view)
 
         recycleBlockView?.setOnClickListener(this)
         scanBlockView?.setOnClickListener(this)
