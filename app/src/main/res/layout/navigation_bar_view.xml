@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
     android:background="@color/colorNavigationBar">
 
     <LinearLayout
@@ -12,20 +14,21 @@
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_gravity="center"
-            android:src="@drawable/hwsearchview_ic_public_cancel"/>
+            android:src="@mipmap/recycle"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:text="test"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:textSize="20dp"-->
+<!--            android:text="test"/>-->
 
     </LinearLayout>
 
@@ -39,17 +42,18 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_gravity="center"
-            android:src="@drawable/hwsearchview_ic_public_cancel"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:text="test"/>
+            android:src="@mipmap/qr_code_scan"/>
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:textSize="20dp"-->
+<!--            android:text="test"/>-->
 
     </LinearLayout>
 
@@ -58,23 +62,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
 
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_gravity="center"
-            android:src="@drawable/hwsearchview_ic_public_cancel"/>
+            android:src="@mipmap/cart"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:text="test"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:textSize="20dp"-->
+<!--            android:text="test"/>-->
 
     </LinearLayout>
 
