@@ -4,4 +4,9 @@
     <string name="checking_setup">Checking setup …</string>
     <string name="checking_setup_result_ok">All good. Start hacking!</string>
     <string name="checking_setup_result_fail">Issue found: %1$s</string>
+    <string name="styled_map">StyledMap</string>
+    <string name="tap_instructions">Tap or long press on the map</string>
+    <string name="toLatlng">screen Point to latLng</string>
+    <string name="toPoint">latLngscreen to Point</string>
+    <string name="move_the_camera">Move the camera</string>
 </resources>
