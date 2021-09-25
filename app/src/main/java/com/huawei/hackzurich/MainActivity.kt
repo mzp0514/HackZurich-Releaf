@@ -21,7 +21,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.huawei.hackzurich.modelcreator.WasteSortingDetector
-import com.huawei.hms.availableupdate.x
 import com.huawei.hackzurich.utils.MapUtils
 import com.huawei.hms.maps.MapsInitializer
 
