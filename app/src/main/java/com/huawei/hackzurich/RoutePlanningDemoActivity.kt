@@ -44,6 +44,7 @@ import com.huawei.hms.maps.model.*
 import com.huawei.hackzurich.utils.NetworkRequestManager
 import com.huawei.hackzurich.utils.NetworkRequestManager.OnNetworkListener
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
+import kotlinx.android.synthetic.main.bottom_sheet2.view.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
@@ -138,11 +139,18 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         getWalkingRouteResult(latLngs[0], latLngs[1])
         getWalkingRouteResult(latLngs[1], latLngs[2])
 
-        val dialog = BottomSheetDialog(this)
-        val bottomSheet = layoutInflater.inflate(R.layout.bottom_sheet, null)
+        var dialog = BottomSheetDialog(this)
+        var bottomSheet = layoutInflater.inflate(R.layout.bottom_sheet, null)
 
         bottomSheet.buttonSubmit.setOnClickListener {
             dialog.dismiss()
+            var dialog2 = BottomSheetDialog(this)
+            var bottomSheet2 = layoutInflater.inflate(R.layout.bottom_sheet2, null)
+            bottomSheet2.buttonOk.setOnClickListener {
+                dialog2.dismiss()
+            }
+            dialog2.setContentView(bottomSheet2)
+            dialog2.show()
         }
 
         dialog.setContentView(bottomSheet)
