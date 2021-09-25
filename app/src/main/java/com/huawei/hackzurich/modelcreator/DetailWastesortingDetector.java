@@ -2,9 +2,7 @@ package com.huawei.hackzurich.modelcreator;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.util.Log;
-import android.util.LogPrinter;
 import android.widget.Toast;
 
 import com.huawei.hiai.modelcreatorsdk.imageclassifier.ImageClassifier;
@@ -18,20 +16,18 @@ import com.huawei.hiai.modelcreatorsdk.imageclassifier.tool.ImageTool;
 //import com.huawei.hms.mlsdk.model.download.MLModelDownloadListener;
 //import com.huawei.hms.mlsdk.model.download.MLModelDownloadStrategy;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-public class WastesortingDetector {
+public class DetailWastesortingDetector {
     private static final String LOG_TAG = "hiai";
     //the model trained in hms toolkit
-    private static final String MODEL_NAME = "image/wasteSorting.mc";
+    private static final String MODEL_NAME = "image/detailWasteSorting.mc";
     private volatile ImageClassifier classifier;
     private Context context;
 
-    public WastesortingDetector(final Context context) throws Exception {
+    public DetailWastesortingDetector(final Context context) throws Exception {
         this.context = context;
 
         loadModelFromAssets();
@@ -121,27 +117,27 @@ public class WastesortingDetector {
 //            @Override
 //            public void run() {
 //                while(!downloadMcTask.isComplete()) {
-//                    WastesortingDetector.sleep(1000);
+//                    Wastesorting2Detector.sleep(1000);
 //                    Log.d(LOG_TAG, "wait download mc task isComplete");
 //                }
 //                try {
 //                    File mcFile = MLLocalModelManager.getInstance().getSyncRecentModelFile(new MLCustomRemoteModel.Factory(remoteModelName).create());
 //                    Log.d(LOG_TAG, "mc model path:" + mcFile.getAbsolutePath());
-//                    WastesortingDetector.this.classifier = new ImageClassifier(context, new FileInputStream(mcFile), 4);
+//                    Wastesorting2Detector.this.classifier = new ImageClassifier(context, new FileInputStream(mcFile), 4);
 //                    Log.d(LOG_TAG, "load model hms success");
 //
 //                    //download resFile and Load resFile
 //                    //NPU_MODE only suport huawei android phone with NPU, CPU_MODE can be run in almost All Android Phone
 //                    final String resRemoteName = "image_classifier_" + ImageTool.getDDkVersion() + "_" + classifier.getModelVersion() + "_base";
 //                    //final String resRemoteName = "image_classifier_" + ImageConst.DDK000 + "_" + classifier.getModelVersion() + "_base"; //CPU Mode res File
-//                    final Task<Void> downloadResTask = WastesortingDetector.this.downloadFile(resRemoteName);
+//                    final Task<Void> downloadResTask = Wastesorting2Detector.this.downloadFile(resRemoteName);
 //                    final String runMode = classifier.isSupportNpuPhone() ? ImageClassifier.NPU_MODE : ImageClassifier.CPU_MODE;
 //
 //                    new Thread() {
 //                        @Override
 //                        public void run() {
 //                            while(!downloadResTask.isComplete()) {
-//                                WastesortingDetector.sleep(1000);
+//                                Wastesorting2Detector.sleep(1000);
 //                                Log.d(LOG_TAG, "wait download res task isComplete");
 //                            }
 //                            try {
