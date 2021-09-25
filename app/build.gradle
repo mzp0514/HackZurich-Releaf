@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId "com.huawei.hackzurich"
         minSdkVersion 19 //26 to use com.huawei.hms:image-vision:1.0.3.304 (otherwise 19)
-        targetSdkVersion 30
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -36,6 +36,16 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.hms
         }
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            def versionName = project.findProperty('app_versionName')
+            def fileName = "MapKitSampleCode-" + versionName + ".apk"
+            variant.outputs.all {
+                outputFileName = fileName
+            }
+
     }
 
     packagingOptions {
@@ -111,7 +121,12 @@ dependencies {
     implementation 'com.huawei.hms:location:5.1.0.303'
 
     // Map Kit: https://www.youtube.com/watch?v=LknAJ-fGjRQ
-    implementation 'com.huawei.hms:maps:5.3.0.300'
+    // implementation 'com.huawei.hms:maps:5.3.0.300'
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.huawei.hms:maps:6.0.0.301'
+    implementation 'com.squareup.okhttp3:okhttp:3.5.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // ML Kit: https://www.youtube.com/watch?v=j6NSko-qxpM
     // All ML Kit services: https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides-V5/overview-sdk-0000001051070278-V5#EN-US_TOPIC_0000001051070278__table95061344575
