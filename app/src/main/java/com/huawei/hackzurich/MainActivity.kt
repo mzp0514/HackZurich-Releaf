@@ -2,7 +2,9 @@ package com.huawei.hackzurich
 
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.app.AlertDialog
 import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
@@ -16,6 +18,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.huawei.hackzurich.modelcreator.WasteSortingDetector
+import com.huawei.hms.availableupdate.x
 
 class MainActivity : FragmentActivity(), View.OnClickListener {
 
@@ -68,6 +71,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             var wasteSorting = WasteSortingDetector(this)
             var ans = wasteSorting.detect(imageBitmap)
+            activateAlertDialogBuilder(ans)
         }
     }
 
@@ -99,6 +103,15 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         } catch (e: ActivityNotFoundException) {
             // display error state to the user
         }
+    }
+
+    private fun activateAlertDialogBuilder(ans: WasteSortingDetector.Prediction) {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Category")
+        alertDialogBuilder.setMessage(ans.label)
+        alertDialogBuilder.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> })
+        alertDialogBuilder.setNegativeButton("Cancel", { dialogInterface: DialogInterface, i: Int -> })
+        alertDialogBuilder.show()
     }
 
     private fun initView() {
