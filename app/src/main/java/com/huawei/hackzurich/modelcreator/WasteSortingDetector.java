@@ -206,6 +206,8 @@ public class WasteSortingDetector {
         ans.label = bestLabel;
         ans.confidence = predictsMap.get(bestLabel);
         ans.costMs = costTime;
+        Log.d(ans.label, "best label");
+        Log.d(String.valueOf(ans.confidence), "confidence level");
         return ans;
     }
 

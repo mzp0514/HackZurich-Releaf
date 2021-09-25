@@ -68,7 +68,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             var wasteSorting = WasteSortingDetector(this)
             var ans = wasteSorting.detect(imageBitmap)
-            println(ans)
         }
     }
 
