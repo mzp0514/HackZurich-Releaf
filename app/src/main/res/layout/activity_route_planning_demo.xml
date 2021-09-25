@@ -6,7 +6,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,89 +27,17 @@
                     android:text="Walking"
                     android:textAllCaps="false" />
 
-                <Button
-                    android:id="@+id/getBicyclingRouteResult"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="getBicyclingRouteResult"
-                    android:text="Bicycling"
-                    android:textAllCaps="false" />
-
-                <Button
-                    android:id="@+id/getDrivingRouteResult"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="getDrivingRouteResult"
-                    android:text="Driving"
-                    android:textAllCaps="false" />
-
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/edt_origin_lat"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:hint="lat"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:text="54.216608"
-                    android:textSize="10dp" />
-
-                <EditText
-                    android:id="@+id/edt_origin_lng"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:hint="lng"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:text="-4.66529"
-                    android:textSize="10dp" />
-
-                <Button
-                    android:id="@+id/btn_set_origin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="setOrigin"
-                    android:text="SetOrigin"
-                    android:textAllCaps="false" />
-            </LinearLayout>
+                android:orientation="horizontal" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/edt_destination_lat"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:hint="lat"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:text="54.209673"
-                    android:textSize="10dp" />
-
-                <EditText
-                    android:id="@+id/edt_destination_lng"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:hint="lng"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:text="-4.64002"
-                    android:textSize="10dp" />
-
-                <Button
-                    android:id="@+id/btn_set_destination"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="setDestination"
-                    android:text="SetDestination"
-                    android:textAllCaps="false" />
-            </LinearLayout>
+                android:orientation="horizontal" />
         </LinearLayout>
     </ScrollView>
 
