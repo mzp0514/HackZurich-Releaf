@@ -187,7 +187,7 @@ public class WasteSortingDetector {
         return this.classifier.isInitOk();
     }
 
-    public  Prediction detect(Bitmap imageBitmap) {
+    public Prediction detect(Bitmap imageBitmap) {
         if(!isReady()) {
             Log.e(LOG_TAG, "the classifier is not init ok");
             Toast.makeText(this.context, "the classifier is not init ok", Toast.LENGTH_SHORT ).show();

@@ -2,17 +2,20 @@ package com.huawei.hackzurich
 
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import androidx.core.app.ActivityCompat
 
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-
+import com.huawei.hackzurich.modelcreator.WasteSortingDetector
 
 class MainActivity : FragmentActivity(), View.OnClickListener {
 
@@ -22,7 +25,7 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
     private var cartBlockView : View ?= null
     private var profileView : View ?= null
     private var messageView : View ?= null
-
+    private val REQUEST_IMAGE_CAPTURE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +62,17 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            var wasteSorting = WasteSortingDetector(this)
+            var ans = wasteSorting.detect(imageBitmap)
+            println(ans)
+        }
+    }
+
+
     override fun onClick(p0: View?) {
         if (p0 === recycleBlockView) {
             val intent = Intent(this, RecycleActivity::class.java)
@@ -80,6 +94,12 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
 
     private fun takePhoto() {
 
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        } catch (e: ActivityNotFoundException) {
+            // display error state to the user
+        }
     }
 
     private fun initView() {
