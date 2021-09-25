@@ -191,4 +191,5 @@ dependencies {
 
     // Wireless Kit: https://developer.huawei.com/consumer/en/hms/huawei-wirelesskit/
 //    implementation 'com.huawei.hms:wireless:5.3.0.311'
+    implementation files('libs/hiai-imageclassifier-2.0.0.aar')
 }
