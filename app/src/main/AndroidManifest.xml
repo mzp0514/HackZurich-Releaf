@@ -32,6 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.huawei.hackzurich.RecycleActivity"/>
+        <activity android:name="com.huawei.hackzurich.CartActivity"/>
+        <activity android:name="com.huawei.hackzurich.ProfileActivity"/>
+        <activity android:name="com.huawei.hackzurich.MessageActivity"/>
+
     </application>
 
 </manifest>
