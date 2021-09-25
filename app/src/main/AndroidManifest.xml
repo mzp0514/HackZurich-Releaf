@@ -32,6 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RoutePlanningDemoActivity"
+            android:label="RoutePlanningDemo" />
         <activity android:name="com.huawei.hackzurich.RecycleActivity"/>
         <activity android:name="com.huawei.hackzurich.CartActivity"/>
         <activity android:name="com.huawei.hackzurich.ProfileActivity"/>
