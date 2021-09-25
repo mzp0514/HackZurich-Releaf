@@ -1,97 +1,101 @@
-/*
- * Copyright (C) 2012 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- *  2020.1.3-Changed modify the import classes type and add some mapView demos.
- *                  Huawei Technologies Co., Ltd.
- *
- */
-
-
 package com.huawei.hackzurich
 
+import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.huawei.hms.maps.*
-import com.huawei.hms.maps.model.LatLng
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.coroutineScope
+import com.huawei.hackzurich.utils.MapUtils
+import com.huawei.hms.maps.MapsInitializer
+import com.huawei.hms.maps.model.ButtCap
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
+import java.lang.Exception
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback {
+class MainActivity : AppCompatActivity(), View.OnClickListener  {
+
     companion object {
         private const val TAG = "MainActivity"
-        private const val MAPVIEW_BUNDLE_KEY = "MapViewBundleKey"
+        private val RUNTIME_PERMISSIONS = arrayOf(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET)
+        private const val REQUEST_CODE = 100
     }
 
-    private var hMap: HuaweiMap? = null
-    private var mMapView: MapView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(TAG, "onCreate: ")
         super.onCreate(savedInstanceState)
-        val huaweiMapOptions = HuaweiMapOptions()
-        huaweiMapOptions.compassEnabled(false)
-        huaweiMapOptions.zoomControlsEnabled(false)
-        huaweiMapOptions.scrollGesturesEnabled(false)
-        huaweiMapOptions.zoomGesturesEnabled(false)
-        mMapView = MapView(this, huaweiMapOptions)
-        var mapViewBundle: Bundle? = null
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY)
+        setContentView(R.layout.activity_main)
+
+        if (!hasPermissions(this, *RUNTIME_PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, RUNTIME_PERMISSIONS, REQUEST_CODE)
         }
-        mMapView?.onCreate(mapViewBundle)
-        mMapView?.getMapAsync(this)
-        setContentView(mMapView)
+
+        MapsInitializer.setApiKey(MapUtils.API_KEY)
+
+        findViewById<Button>(R.id.BasicMap).setOnClickListener(this)
+
+
+        title = getString(R.string.app_title)
+
+        val checkStatusTextView = findViewById<TextView>(R.id.main_check)
+
+        lifecycle.coroutineScope.launchWhenCreated {
+            try {
+                checkHMS()
+                checkStatusTextView.text = getString(R.string.checking_setup_result_ok)
+            } catch (checkException: Exception) {
+                checkStatusTextView.text =
+                    getString(R.string.checking_setup_result_fail, checkException.message)
+            }
+        }
     }
 
-    override fun onStart() {
-        super.onStart()
-        mMapView?.onStart()
+    override fun onClick(v: View) {
+        when (v.id) {
+
+            R.id.BasicMap -> {
+                Log.i(TAG, "onClick: BasicMap")
+                startActivity(Intent(this, MarkerDemoActivity::class.java))
+            }
+
+        }
     }
 
-    override fun onStop() {
-        super.onStop()
-        mMapView?.onStop()
+    private fun hasPermissions(context: Context, vararg permissions: String): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && permissions != null) {
+            for (permission in permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mMapView?.onDestroy()
+    private suspend fun checkHMS() {
+        testHmsCorePresence()
+        testAccountByRequestingPushNotificationsToken()
     }
 
-    override fun onMapReady(map: HuaweiMap) {
-        Log.d(TAG, "onMapReady: ")
-        hMap = map
-        hMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(48.893478, 2.334595), 10f))
+    private suspend fun testAccountByRequestingPushNotificationsToken() {
+        val pushToken = withContext(Dispatchers.IO) {
+            HmsUtils.getPushNotificationsToken(this@MainActivity)
+        }
+        check(pushToken.isNotEmpty()) { "Push notifications token retrieved, but empty. Clear app data and try again." }
     }
 
-    override fun onPause() {
-        mMapView?.onPause()
-        super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mMapView?.onResume()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        mMapView?.onLowMemory()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mMapView?.onSaveInstanceState(outState)
+    private fun testHmsCorePresence() {
+        check(HmsUtils.isHmsAvailable(this)) { "Please make sure you have HMS Core installed on the test device." }
     }
 }

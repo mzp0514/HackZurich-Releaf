@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_basic_demo.xml" value="0.1203125" />
         <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_map_view.xml" value="0.1203125" />
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/activity_marker_demo.xml" value="0.1203125" />
+        <entry key="..\:/Users/Mao Zhipeng/Documents/hackzurich/hms-start-hacking/app/src/main/res/layout/custom_info_contents.xml" value="0.1203125" />
       </map>
     </option>
   </component>

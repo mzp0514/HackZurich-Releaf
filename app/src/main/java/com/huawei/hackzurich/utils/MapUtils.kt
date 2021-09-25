@@ -39,5 +39,5 @@ object MapUtils {
     const val MAX_ZOOM_LEVEL = 20f
     const val MIN_ZOOM_LEVEL = 3f
 
-    const val API_KEY = "YOUR API KEY"
+    const val API_KEY = "CgB6e3x9N/uhUh4BjUEAUNRwZTbBnCtNQ7pdyyhDSEfbVZR2BibGaY1Wosx8JWmZKzJfDtWKPqu950LXFvZ4z6BI"
 }
