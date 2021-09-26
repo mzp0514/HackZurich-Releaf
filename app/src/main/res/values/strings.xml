@@ -9,6 +9,6 @@
     <string name="toLatlng">screen Point to latLng</string>
     <string name="toPoint">latLngscreen to Point</string>
     <string name="move_the_camera">Move the camera</string>
-    <string name="okay">Okay</string>
+    <string name="okay">OK</string>
     <string name="_5">+5</string>
 </resources>

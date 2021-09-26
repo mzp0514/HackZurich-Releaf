@@ -15,14 +15,24 @@ import androidx.core.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.os.Build
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.provider.MediaStore
 import android.view.View
+import android.view.Window
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.huawei.hackzurich.modelcreator.WasteSortingDetector
 import com.huawei.hackzurich.utils.MapUtils
 import com.huawei.hms.maps.MapsInitializer
+import android.view.WindowManager
+import android.app.Activity
+
+
+
+
+
+
 
 
 class MainActivity : FragmentActivity(), View.OnClickListener {
@@ -64,6 +74,13 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
                     WRITE_EXTERNAL_STORAGE
                 ), REQUEST_CAMERA
             )
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            val decorView = window.decorView
+            val option = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+            decorView.systemUiVisibility = option
+            window.statusBarColor = Color.BLACK
         }
     }
 

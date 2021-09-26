@@ -1,11 +1,16 @@
 package com.huawei.hackzurich
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
+import android.os.Build
+
+
+
 
 class MarketActivity : FragmentActivity(), View.OnClickListener {
     private val TAG = "MarketActivity"
@@ -32,6 +37,13 @@ class MarketActivity : FragmentActivity(), View.OnClickListener {
         marketBlockView?.setOnClickListener(this)
         profileView?.setOnClickListener(this)
         messageView?.setOnClickListener(this)
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            val decorView = window.decorView
+            val option = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+            decorView.systemUiVisibility = option
+            window.statusBarColor = Color.BLACK
+        }
     }
 
     override fun onClick(view: View) {

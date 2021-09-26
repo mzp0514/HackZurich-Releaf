@@ -25,6 +25,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -111,6 +112,13 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         latLngs.add(LatLng(47.397993427656424, 8.481548334262188)) // Recyclinghof Werdhölzli
 
 //        mMoneyBonus = getIntent().getIntExtra(RecycleActivity.KEY_MONEY, 5);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            val decorView = window.decorView
+            val option = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+            decorView.systemUiVisibility = option
+            window.statusBarColor = Color.BLACK
+        }
     }
 
     private fun isGPSOpen(context: Context): Boolean {
