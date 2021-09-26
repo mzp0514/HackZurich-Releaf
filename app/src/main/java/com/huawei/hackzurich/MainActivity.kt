@@ -37,17 +37,17 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
 
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_CAMERA = 0x01
-    private var recycleBlockView : View ?= null
+    private var fakeView : View ?= null
+//    private var recycleBlockView : View ?= null
     private var scanBlockView : View ?= null
     private var marketBlockView : View ?= null
     private var profileView : View ?= null
     private var messageView : View ?= null
-    private var cameraPreview : View ?= null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_recycle)
         if (!hasPermissions(this, *RUNTIME_PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, RUNTIME_PERMISSIONS, REQUEST_CODE)
         }
@@ -56,15 +56,6 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
 
         MapsInitializer.setApiKey(MapUtils.API_KEY)
 
-        if (ContextCompat.checkSelfPermission(this, CAMERA)
-            !== PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                this, arrayOf(
-                    CAMERA,
-                    WRITE_EXTERNAL_STORAGE
-                ), REQUEST_CAMERA
-            )
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -79,8 +70,8 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
 
 
     override fun onClick(p0: View?) {
-        if (p0 === recycleBlockView) {
-            val intent = Intent(this, RecycleActivity::class.java)
+        if (p0 === fakeView) {
+            val intent = Intent(this, RoutePlanningDemoActivity::class.java)
             startActivity(intent);
         } else if (p0 === scanBlockView) {
             takePhoto()
@@ -98,7 +89,15 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
     }
 
     private fun takePhoto() {
-
+        if (ContextCompat.checkSelfPermission(this, CAMERA)
+            !== PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(
+                    CAMERA,
+                    WRITE_EXTERNAL_STORAGE
+                ), REQUEST_CAMERA
+            )
+        }
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
@@ -117,19 +116,19 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-        recycleBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_1)
+        fakeView = findViewById<ImageView>(R.id.fake_ui)
+//        recycleBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_1)
         scanBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_2)
         marketBlockView = findViewById<LinearLayout>(R.id.nav_bar_block_3)
         profileView = findViewById<ImageView>(R.id.profile_icon)
         messageView = findViewById<ImageView>(R.id.message_icon)
-        cameraPreview = findViewById<CameraPreview>(R.id.camera_view)
 
-        recycleBlockView?.setOnClickListener(this)
+//        recycleBlockView?.setOnClickListener(this)
+        fakeView?.setOnClickListener(this)
         scanBlockView?.setOnClickListener(this)
         marketBlockView?.setOnClickListener(this)
         profileView?.setOnClickListener(this)
         messageView?.setOnClickListener(this)
-
     }
 
     private fun hasPermissions(context: Context, vararg permissions: String): Boolean {
