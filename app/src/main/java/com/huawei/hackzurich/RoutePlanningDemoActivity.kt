@@ -32,6 +32,7 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -75,6 +76,7 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
     private val mPolylines: MutableList<Polyline> = ArrayList()
     private val mPaths: MutableList<List<LatLng>> = ArrayList()
     private var mLatLngBounds: LatLngBounds? = null
+//    private var mMoneyBonus = 5
 
     private val mHandler: Handler = object : Handler() {
         @SuppressLint("HandlerLeak")
@@ -108,7 +110,7 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         latLngs.add(LatLng(47.402177626411635, 8.47259129868391)) // Vergarverk Biogas Zurich Biowaste
         latLngs.add(LatLng(47.397993427656424, 8.481548334262188)) // Recyclinghof Werdhölzli
 
-
+//        mMoneyBonus = getIntent().getIntExtra(RecycleActivity.KEY_MONEY, 5);
     }
 
     private fun isGPSOpen(context: Context): Boolean {
@@ -159,6 +161,9 @@ class RoutePlanningDemoActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         dialog.setContentView(bottomSheet)
+
+//        bottomSheet.findViewById<TextView>(R.id.textView).setText("+" + mMoneyBonus.toString())
+
         dialog.show()
     }
 
