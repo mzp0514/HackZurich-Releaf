@@ -111,7 +111,10 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Category")
         alertDialogBuilder.setMessage(ans.label)
-        alertDialogBuilder.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> })
+        alertDialogBuilder.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int ->
+            val intent = Intent(this, RecycleActivity::class.java)
+            startActivity(intent);
+        })
         alertDialogBuilder.setNegativeButton("Cancel", { dialogInterface: DialogInterface, i: Int -> })
         alertDialogBuilder.show()
     }
