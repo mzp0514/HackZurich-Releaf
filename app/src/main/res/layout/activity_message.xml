@@ -21,7 +21,7 @@
             android:layout_below="@id/top_bar"
             android:text="Messages"
             android:textColor="#000000"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <ImageView
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/top_bar"
-            android:layout_marginTop="-50dp"
+            android:layout_marginTop="-70dp"
             android:src="@mipmap/fake_message" />
 
         <include

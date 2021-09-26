@@ -109,10 +109,11 @@ class MainActivity : FragmentActivity(), View.OnClickListener {
 
     private fun activateAlertDialogBuilder(ans: WasteSortingDetector.Prediction) {
         val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle("Category")
-        alertDialogBuilder.setMessage(ans.label)
-        alertDialogBuilder.setPositiveButton("Yes", { dialogInterface: DialogInterface, i: Int -> })
-        alertDialogBuilder.setNegativeButton("Cancel", { dialogInterface: DialogInterface, i: Int -> })
+        alertDialogBuilder.setTitle("Ah-ha!")
+        alertDialogBuilder.setMessage("The object is: " + ans.label.replace("_", " ").uppercase() + "!")
+        alertDialogBuilder.setPositiveButton("Recycle Now") { dialogInterface: DialogInterface, i: Int -> }
+        alertDialogBuilder.setNegativeButton("Maybe Later") { dialogInterface: DialogInterface, i: Int -> }
+
         alertDialogBuilder.show()
     }
 
